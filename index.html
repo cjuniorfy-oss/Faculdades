@@ -197,6 +197,7 @@ async function load(){try{D=await api('me');render();
     if(D.role==='seller'&&!D.vazio){let seen=false;try{seen=localStorage.getItem('c27tour')==='1';}catch(e){}if(!seen&&TS<0)setTimeout(tourOpen,400);}}
   catch(e){$('kpis').innerHTML='';$('app').innerHTML=`<div class="msg"><b>Não foi possível abrir</b><p class="m">${esc(e.message)}</p></div>`;}}
 async function refresh(){if(!D||busy||TS>=0)return;const a=document.activeElement;if(a&&/INPUT|SELECT|TEXTAREA/.test(a.tagName))return;try{const n=await api('me');D=n;render();}catch(e){}}
+addEventListener('hashchange',()=>location.reload());
 if(!TOKEN){$('app').innerHTML='<div class="msg"><b>Link incompleto</b><p class="m">Abra o link completo que você recebeu no Teams.</p></div>';}
 else{load();setInterval(refresh,60000);}
 }
